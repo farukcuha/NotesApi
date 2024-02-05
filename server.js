@@ -74,12 +74,12 @@ app.delete('/notes/:id', async (req, res) => {
 });
 
 // Clear all notes
-app.delete('/notes/clear', async (req, res) => {
+app.post('/notes/clear', async (req, res) => {
   try {
     await Note.deleteMany({});
     res.json({ message: 'All notes cleared successfully' });
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error });
   }
 });
 
