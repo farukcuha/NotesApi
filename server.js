@@ -61,7 +61,7 @@ app.post('/notes', async (req, res) => {
     const { title } = req.body;
     const newNote = new Note({ title });
     await newNote.save();
-    res.json({ message: 'Note inserted successfully', note: newNote });
+    res.status(201).send()
   } catch (error) {
     res.status(500).json({ error });
   }
@@ -72,7 +72,7 @@ app.delete('/notes/:id', async (req, res) => {
   try {
     const noteId = req.params.id;
     await Note.findByIdAndDelete(noteId);
-    res.json({ message: 'Note deleted successfully', noteId });
+    res.send('Note deleted successfully!');
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
@@ -82,7 +82,7 @@ app.delete('/notes/:id', async (req, res) => {
 app.post('/notes/clear', async (req, res) => {
   try {
     await Note.deleteMany({});
-    res.json({ message: 'All notes cleared successfully' });
+    res.send('All notes deleted successfully!');
   } catch (error) {
     res.status(500).json({ error });
   }
