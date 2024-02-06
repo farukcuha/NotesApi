@@ -44,7 +44,12 @@ app.get('/', async (req, res) => {
 app.get('/notes', async (req, res) => {
   try {
     const notes = await Note.find();
-    res.json(notes);
+    res.json(
+      {
+        size: notes.length,
+        data: notes
+      }
+    );
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
