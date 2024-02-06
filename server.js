@@ -72,7 +72,7 @@ app.delete('/notes/:id', async (req, res) => {
   try {
     const noteId = req.params.id;
     await Note.findByIdAndDelete(noteId);
-    res.send('Note deleted successfully');
+    res.json({ message: 'Note deleted successfully', noteId });
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
@@ -82,7 +82,7 @@ app.delete('/notes/:id', async (req, res) => {
 app.post('/notes/clear', async (req, res) => {
   try {
     await Note.deleteMany({});
-    res.send('All notes cleared successfully');
+    res.json({ message: 'All notes cleared successfully' });
   } catch (error) {
     res.status(500).json({ error });
   }
